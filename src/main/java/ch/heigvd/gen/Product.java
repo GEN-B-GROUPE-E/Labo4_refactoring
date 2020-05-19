@@ -46,4 +46,29 @@ public class Product {
             return "no color";
         }
     }
+
+    public StringBuffer toJSONString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("{");
+        sb.append("\"code\": \"");
+        sb.append(this.getCode());
+        sb.append("\", ");
+        sb.append("\"color\": \"");
+        sb.append(this.getColorFor());
+        sb.append("\", ");
+
+        if (this.getSize() != Size.NO_SIZE) {
+            sb.append("\"size\": \"");
+            sb.append(this.getSizeFor());
+            sb.append("\", ");
+        }
+
+        sb.append("\"price\": ");
+        sb.append(this.getPrice());
+        sb.append(", ");
+        sb.append("\"currency\": \"");
+        sb.append(this.getCurrency());
+        sb.append("\"}, ");
+        return sb;
+    }
 }
