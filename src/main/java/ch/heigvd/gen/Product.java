@@ -19,10 +19,6 @@ public class Product {
         return code;
     }
 
-    public Color getColor() {
-        return color;
-    }
-
     public Size getSize() {
         return size;
     }
@@ -39,7 +35,7 @@ public class Product {
         return size.toString();
     }
 
-    String getColorFor() {
+    String getColor() {
         if(color != null){
             return color.toString();
         }else{
@@ -54,7 +50,7 @@ public class Product {
         sb.append(this.getCode());
         sb.append("\", ");
         sb.append("\"color\": \"");
-        sb.append(this.getColorFor());
+        sb.append(this.getColor());
         sb.append("\", ");
 
         if (this.getSize() != Size.NO_SIZE) {
