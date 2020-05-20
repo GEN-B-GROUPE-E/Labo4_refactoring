@@ -31,11 +31,11 @@ public class Product {
         return currency;
     }
 
-    String getSizeFor() {
+    public String getSizeString() {
         return size.toString();
     }
 
-    String getColor() {
+    public String getColor() {
         if(color != null){
             return color.toString();
         }else{
@@ -55,7 +55,7 @@ public class Product {
 
         if (this.getSize() != Size.NO_SIZE) {
             sb.append("\"size\": \"");
-            sb.append(this.getSizeFor());
+            sb.append(this.getSizeString());
             sb.append("\", ");
         }
 
