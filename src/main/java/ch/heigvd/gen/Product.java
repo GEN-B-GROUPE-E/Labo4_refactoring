@@ -19,10 +19,6 @@ public class Product {
         return code;
     }
 
-    public Color getColor() {
-        return color;
-    }
-
     public Size getSize() {
         return size;
     }
@@ -35,15 +31,40 @@ public class Product {
         return currency;
     }
 
-    String getSizeFor() {
+    public String getSizeString() {
         return size.toString();
     }
 
-    String getColorFor() {
+    public String getColor() {
         if(color != null){
             return color.toString();
         }else{
             return "no color";
         }
+    }
+
+    public StringBuffer toJSONString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("{");
+        sb.append("\"code\": \"");
+        sb.append(this.getCode());
+        sb.append("\", ");
+        sb.append("\"color\": \"");
+        sb.append(this.getColor());
+        sb.append("\", ");
+
+        if (this.getSize() != Size.NO_SIZE) {
+            sb.append("\"size\": \"");
+            sb.append(this.getSizeString());
+            sb.append("\", ");
+        }
+
+        sb.append("\"price\": ");
+        sb.append(this.getPrice());
+        sb.append(", ");
+        sb.append("\"currency\": \"");
+        sb.append(this.getCurrency());
+        sb.append("\"}, ");
+        return sb;
     }
 }
