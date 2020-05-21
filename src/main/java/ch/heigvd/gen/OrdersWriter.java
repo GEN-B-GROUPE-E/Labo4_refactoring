@@ -1,5 +1,8 @@
 package ch.heigvd.gen;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.util.ArrayList;
 
 public class OrdersWriter {
@@ -10,17 +13,14 @@ public class OrdersWriter {
     }
 
     public String getContents() {
-        StringBuffer sb = new StringBuffer("{\"orders\": [");
-
+        JSONObject obj = new JSONObject();
+        JSONArray jsonOrders = new JSONArray();
         for (int i = 0; i < orders.size(); i++) {
             Order order = orders.get(i);
-            sb.append(order.toJSONString());
+            jsonOrders.add(order.jsonConvert());
         }
 
-        if (orders.size() > 0) {
-            sb.delete(sb.length() - 2, sb.length());
-        }
-
-        return sb.append("]}").toString();
+        obj.put("orders", jsonOrders);
+        return obj.toString();
     }
 }

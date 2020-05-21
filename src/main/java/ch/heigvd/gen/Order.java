@@ -1,9 +1,12 @@
 package ch.heigvd.gen;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order {
+public class Order implements JSONConvertible {
     private List<Product> products = new ArrayList<Product>();
     private int id;
 
@@ -27,23 +30,18 @@ public class Order {
         products.add(product);
     }
 
-    public StringBuffer toJSONString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("{");
-        sb.append("\"id\": ");
-        sb.append(this.getOrderId());
-        sb.append(", ");
-        sb.append("\"products\": [");
+
+    @Override
+    public JSONObject jsonConvert() {
+        JSONObject obj = new JSONObject();
+        JSONArray jsonProducts = new JSONArray();
         for (int j = 0; j < this.getProductsCount(); j++) {
-            sb.append(getProduct(j).toJSONString());
+            jsonProducts.add(getProduct(j).jsonConvert());
         }
+        obj.put("id", getOrderId());
+        obj.put("products", jsonProducts);
 
-        if (this.getProductsCount() > 0) {
-            sb.delete(sb.length() - 2, sb.length());
-        }
 
-        sb.append("]");
-        sb.append("}, ");
-        return sb;
+        return obj;
     }
 }
