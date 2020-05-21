@@ -1,6 +1,8 @@
 package ch.heigvd.gen;
 
-public class Product {
+import org.json.simple.JSONObject;
+
+public class Product implements JSONConvertible {
     private String code;
     private Color color;
     private Size size;
@@ -43,28 +45,17 @@ public class Product {
         }
     }
 
-    public StringBuffer toJSONString() {
-        StringBuffer sb = new StringBuffer();
-        sb.append("{");
-        sb.append("\"code\": \"");
-        sb.append(this.getCode());
-        sb.append("\", ");
-        sb.append("\"color\": \"");
-        sb.append(this.getColor());
-        sb.append("\", ");
-
+    @Override
+    public JSONObject jsonConvert() {
+        JSONObject obj = new JSONObject();
+        obj.put("code", getCode());
+        obj.put("color", getColor());
         if (this.getSize() != Size.NO_SIZE) {
-            sb.append("\"size\": \"");
-            sb.append(this.getSizeString());
-            sb.append("\", ");
+            obj.put("size", getSize());
         }
+        obj.put("price", getPrice());
+        obj.put("currency", getCurrency());
 
-        sb.append("\"price\": ");
-        sb.append(this.getPrice());
-        sb.append(", ");
-        sb.append("\"currency\": \"");
-        sb.append(this.getCurrency());
-        sb.append("\"}, ");
-        return sb;
+        return obj;
     }
 }

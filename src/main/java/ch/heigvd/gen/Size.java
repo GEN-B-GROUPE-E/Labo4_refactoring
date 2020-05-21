@@ -17,7 +17,7 @@ public enum Size {
     @Override
     public String toString() {
 
-        return displaySize;
+        return "\""+displaySize+"\"";
 
     }
 }
