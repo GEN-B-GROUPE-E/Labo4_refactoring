@@ -1,5 +1,4 @@
 import ch.heigvd.gen.Order;
-import ch.heigvd.gen.Orders;
 import ch.heigvd.gen.OrdersWriter;
 import ch.heigvd.gen.Product;
 import org.junit.jupiter.api.Test;
@@ -8,19 +7,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import ch.heigvd.gen.*;
 
+import java.util.ArrayList;
+
 
 public class OrdersWriterTest {
-    Orders orders = new Orders();
+    ArrayList<Order> orders = new ArrayList<>();
     Order order111 = new Order(111);
 
     @BeforeEach
     public void SetupOneOrder() {
-        orders.AddOrder(order111);
+        orders.add(order111);
     }
 
     @Test
     public void NoOrder() {
-        assertEquals("{\"orders\": []}", new OrdersWriter(new Orders()).getContents());
+        assertEquals("{\"orders\": []}", new OrdersWriter(new ArrayList()).getContents());
     }
 
     @Test
@@ -31,7 +32,7 @@ public class OrdersWriterTest {
 
     @Test
     public void TwoOrders() {
-        orders.AddOrder(new Order(222));
+        orders.add(new Order(222));
 
         String order111Json = JsonOrder111WithProduct("");
         String order222Json = "{\"id\": 222, \"products\": []}";
