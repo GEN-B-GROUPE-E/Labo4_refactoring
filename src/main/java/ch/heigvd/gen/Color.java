@@ -6,6 +6,7 @@ public enum Color {
     YELLOW("yellow");
 
     private String displayColor;
+
     Color(String displayColor){
         this.displayColor = displayColor;
     }

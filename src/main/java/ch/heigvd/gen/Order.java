@@ -10,35 +10,30 @@ public class Order implements JSONConvertible {
     private List<Product> products = new ArrayList<Product>();
     private int id;
 
+    /**
+     * Constructor
+     * @param id the Order's identifier
+     */
     public Order(int id) {
         this.id = id;
     }
 
-    public int getOrderId() {
-        return id;
-    }
-
-    public int getProductsCount() {
-        return products.size();
-    }
-
-    public Product getProduct(int j) {
-        return products.get(j);
-    }
-
+    /**
+     * Adds a product to the order
+     * @param product the product to be added
+     */
     public void AddProduct(Product product) {
         products.add(product);
     }
-
 
     @Override
     public JSONObject jsonConvert() {
         JSONObject obj = new JSONObject();
         JSONArray jsonProducts = new JSONArray();
-        for (int j = 0; j < this.getProductsCount(); j++) {
-            jsonProducts.add(getProduct(j).jsonConvert());
+        for (int j = 0; j < this.products.size(); j++) {
+            jsonProducts.add(products.get(j).jsonConvert());
         }
-        obj.put("id", getOrderId());
+        obj.put("id", id);
         obj.put("products", jsonProducts);
 
 
