@@ -9,32 +9,20 @@ public class Product implements JSONConvertible {
     private double price;
     private String currency;
 
+    /**
+     * Constructor
+     * @param code the product's code as a String
+     * @param color the product's color as an Color Enum
+     * @param size the product's size as an Enum
+     * @param price the product's price
+     * @param currency the product's currency (String)
+     */
     public Product(String code, Color color, Size size, double price, String currency) {
         this.code = code;
         this.color = color;
         this.size = size;
         this.price = price;
         this.currency = currency;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public Size getSize() {
-        return size;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public String getSizeString() {
-        return size.toString();
     }
 
     public String getColor() {
@@ -48,13 +36,13 @@ public class Product implements JSONConvertible {
     @Override
     public JSONObject jsonConvert() {
         JSONObject obj = new JSONObject();
-        obj.put("code", getCode());
+        obj.put("code", code);
         obj.put("color", getColor());
-        if (this.getSize() != Size.NO_SIZE) {
-            obj.put("size", getSize());
+        if (size != Size.NO_SIZE) {
+            obj.put("size", size.toString());
         }
-        obj.put("price", getPrice());
-        obj.put("currency", getCurrency());
+        obj.put("price", price);
+        obj.put("currency", currency);
 
         return obj;
     }

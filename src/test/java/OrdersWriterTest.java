@@ -84,6 +84,7 @@ public class OrdersWriterTest {
 
         assertEquals(obj.toString(), new OrdersWriter(orders).getContents());
     }
+
     private JSONObject createProduct(String code, String color, String size, double price, String currency){
         JSONObject product = new JSONObject();
         product.put("code", code);
